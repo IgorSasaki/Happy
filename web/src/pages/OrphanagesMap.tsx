@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FiPlus } from 'react-icons/fi';
-import { Map, TileLayer } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
+import { FiPlus, FiArrowRight } from 'react-icons/fi';
+import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 
 import '../styles/pages/orphanages-map.css';
 
 import mapMarker from '../images/map-marker.svg';
+import MapIcon from '../utils/mapIcon';
 
 function OrphanagesMap() {
     return (
@@ -38,9 +38,21 @@ function OrphanagesMap() {
                 >
                 </TileLayer>
 
+                <Marker
+                    icon={MapIcon}
+                    position={[-21.770241, -48.139621]}
+                >
+                    <Popup closeButton={false} minWidth={240} minHeight={240} className="map-popup">
+                        Orfanato
+                        <Link to="/orphanages/:id">
+                            <FiArrowRight size={20} color="fff" />
+                        </Link>
+                    </Popup>
+                </Marker>
+
             </Map>
 
-            <Link to="" className="create-orphanage">
+            <Link to="/orphanage/create" className="create-orphanage">
                 <FiPlus size={32} color="#fff" />
             </Link>
         </div>
