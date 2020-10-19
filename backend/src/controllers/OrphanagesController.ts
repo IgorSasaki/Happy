@@ -42,7 +42,7 @@ export default {
 
         const requestImages = request.files as Express.Multer.File[];
         const images = requestImages.map(image => {
-            return { path: image.filename}
+            return { path: image.filename }
         })
 
         const data = {
@@ -54,6 +54,13 @@ export default {
             opening_hours,
             open_on_weekends,
             images
+        }
+
+        if(data.open_on_weekends === 'true'){
+            data.open_on_weekends = true;
+        }
+        else {
+            data.open_on_weekends = false;
         }
 
         const schema = Yup.object().shape({
@@ -73,7 +80,7 @@ export default {
             abortEarly: false
         });
 
-        const orphanage = orphanagesRepository.create(data)
+        const orphanage = orphanagesRepository.create(data);
 
         await orphanagesRepository.save(orphanage);
 
